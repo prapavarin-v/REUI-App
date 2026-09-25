@@ -1,83 +1,94 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-/// ตรงกับ schema ของ Firestore collection: products/{productId}
 class ProductModel {
   final String id;
   final String sellerId;
-  final String name;
+  final String title;
   final String description;
-  final num price;
+  final int price;
   final String categoryId;
-  final String condition;
+  final String condition; // เช่น ใหม่มาก / ดี / พอใช้
   final List<String> images;
   final String status; // available | reserved | sold
-  final int viewCount;
-  final int likeCount;
-  final DateTime? createdAt;
-  final String location;
+  final String faculty; // คณะของผู้ขาย (ใช้ filter)
+  final String? aiCaption; // แคปชันที่ AI เขียนให้
+  final bool aiGenerated;
+  final DateTime createdAt;
 
   ProductModel({
     required this.id,
     required this.sellerId,
-    required this.name,
-    this.description = '',
-    this.price = 0,
-    this.categoryId = '',
-    this.condition = '',
-    this.images = const [],
-    this.status = 'available',
-    this.viewCount = 0,
-    this.likeCount = 0,
-    this.createdAt,
-    this.location = '',
+    required this.title,
+    required this.description,
+    required this.price,
+    required this.categoryId,
+    required this.condition,
+    required this.images,
+    required this.status,
+    required this.faculty,
+    this.aiCaption,
+    this.aiGenerated = false,
+    required this.createdAt,
   });
 
-  String get thumbnail => images.isNotEmpty ? images.first : '';
-
-  factory ProductModel.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
-    final map = doc.data() ?? {};
+  factory ProductModel.fromMap(String id, Map<String, dynamic> map) {
     return ProductModel(
-      id: doc.id,
+      id: id,
       sellerId: map['sellerId'] ?? '',
-      name: map['name'] ?? '',
+      title: map['title'] ?? '',
       description: map['description'] ?? '',
-      price: map['price'] ?? 0,
+      price: (map['price'] ?? 0),
       categoryId: map['categoryId'] ?? '',
       condition: map['condition'] ?? '',
-      images: List<String>.from(map['images'] ?? const []),
+      images: List<String>.from(map['images'] ?? []),
       status: map['status'] ?? 'available',
-      viewCount: (map['viewCount'] ?? 0) as int,
-      likeCount: (map['likeCount'] ?? 0) as int,
-      createdAt: (map['createdAt'] as Timestamp?)?.toDate(),
-      location: map['location'] ?? '',
+      faculty: map['faculty'] ?? '',
+      aiCaption: map['aiCaption'],
+      aiGenerated: map['aiGenerated'] ?? false,
+      createdAt: (map['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
-}
 
-/// ตรงกับ schema ของ Firestore collection: categories/{categoryId}
-class CategoryModel {
-  final String id;
-  final String name;
-  final String icon;
-  final int order;
-  final int productCount;
+  Map<String, dynamic> toMap() {
+    return {
+      'sellerId': sellerId,
+      'title': title,
+      'description': description,
+      'price': price,
+      'categoryId': categoryId,
+      'condition': condition,
+      'images': images,
+      'status': status,
+      'faculty': faculty,
+      'aiCaption': aiCaption,
+      'aiGenerated': aiGenerated,
+      'createdAt': Timestamp.fromDate(createdAt),
+    };
+  }
 
-  CategoryModel({
-    required this.id,
-    required this.name,
-    this.icon = '',
-    this.order = 0,
-    this.productCount = 0,
-  });
-
-  factory CategoryModel.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
-    final map = doc.data() ?? {};
-    return CategoryModel(
-      id: doc.id,
-      name: map['name'] ?? '',
-      icon: map['icon'] ?? '',
-      order: (map['order'] ?? 0) as int,
-      productCount: (map['productCount'] ?? 0) as int,
+  ProductModel copyWith({
+    String? title,
+    String? description,
+    int? price,
+    String? categoryId,
+    String? condition,
+    List<String>? images,
+    String? status,
+  }) {
+    return ProductModel(
+      id: id,
+      sellerId: sellerId,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      price: price ?? this.price,
+      categoryId: categoryId ?? this.categoryId,
+      condition: condition ?? this.condition,
+      images: images ?? this.images,
+      status: status ?? this.status,
+      faculty: faculty,
+      aiCaption: aiCaption,
+      aiGenerated: aiGenerated,
+      createdAt: createdAt,
     );
   }
 }

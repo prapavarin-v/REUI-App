@@ -1,63 +1,56 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-/// ตรงกับ schema ของ Firestore collection: users/{uid}
 class UserModel {
   final String uid;
+  final String name;
+  final String studentId;
+  final String faculty;
+  final String major;
   final String email;
-  final String displayName;
-  final String photoURL;
-  final String phone;
-  final String authProvider; // "email" | "google"
-  final String bio;
+  final String photoUrl;
   final double rating;
   final int reviewCount;
-  final String location;
-  final DateTime? createdAt;
+  final DateTime createdAt;
 
   UserModel({
     required this.uid,
+    required this.name,
+    required this.studentId,
+    required this.faculty,
+    required this.major,
     required this.email,
-    this.displayName = '',
-    this.photoURL = '',
-    this.phone = '',
-    this.authProvider = 'email',
-    this.bio = '',
-    this.rating = 0.0,
+    this.photoUrl = '',
+    this.rating = 0,
     this.reviewCount = 0,
-    this.location = '',
-    this.createdAt,
+    required this.createdAt,
   });
 
   factory UserModel.fromMap(String uid, Map<String, dynamic> map) {
     return UserModel(
       uid: uid,
+      name: map['name'] ?? '',
+      studentId: map['studentId'] ?? '',
+      faculty: map['faculty'] ?? '',
+      major: map['major'] ?? '',
       email: map['email'] ?? '',
-      displayName: map['displayName'] ?? '',
-      photoURL: map['photoURL'] ?? '',
-      phone: map['phone'] ?? '',
-      authProvider: map['authProvider'] ?? 'email',
-      bio: map['bio'] ?? '',
+      photoUrl: map['photoUrl'] ?? '',
       rating: (map['rating'] ?? 0).toDouble(),
-      reviewCount: (map['reviewCount'] ?? 0) as int,
-      location: map['location'] ?? '',
-      createdAt: (map['createdAt'] as Timestamp?)?.toDate(),
+      reviewCount: (map['reviewCount'] ?? 0),
+      createdAt: (map['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
+      'name': name,
+      'studentId': studentId,
+      'faculty': faculty,
+      'major': major,
       'email': email,
-      'displayName': displayName,
-      'photoURL': photoURL,
-      'phone': phone,
-      'authProvider': authProvider,
-      'bio': bio,
+      'photoUrl': photoUrl,
       'rating': rating,
       'reviewCount': reviewCount,
-      'location': location,
-      'createdAt': createdAt != null
-          ? Timestamp.fromDate(createdAt!)
-          : FieldValue.serverTimestamp(),
+      'createdAt': Timestamp.fromDate(createdAt),
     };
   }
 }

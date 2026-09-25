@@ -1,24 +1,35 @@
-name: regi_app
-description: REGI - Second-hand marketplace app
-publish_to: 'none'
+name: reuni_app
+description: REUNI - แอปขายของมือสองสำหรับนักศึกษา (Second Hand, New Stories)
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
 
-  # Firebase
+  # Firebase (ไม่ใช้ firebase_storage แล้ว — เปลี่ยนไปอัปโหลดรูปผ่าน Cloudinary แทน
+  # เพื่อไม่ต้องผูกบัตรเครดิต/อัปเกรดเป็น Blaze plan ดู lib/services/storage_service.dart)
   firebase_core: ^3.6.0
   firebase_auth: ^5.3.1
   cloud_firestore: ^5.4.4
-  google_sign_in: ^6.2.1
 
   # State management
   provider: ^6.1.2
+
+  # UI helpers
+  google_fonts: ^6.2.1
+  cached_network_image: ^3.4.1
+  image_picker: ^1.1.2
+  intl: ^0.19.0
+  shimmer: ^3.0.0
+  flutter_rating_bar: ^4.0.1
+
+  # HTTP (สำหรับเรียก AI API ผ่าน Cloud Function / backend ของตัวเอง)
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
@@ -27,5 +38,14 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # assets:
-  #   - assets/images/logo.png
+  assets:
+  - assets/images/
+
+  # fonts:
+  #   - family: Prompt
+  #     fonts:
+  #       - asset: assets/fonts/Prompt-Regular.ttf
+  #       - asset: assets/fonts/Prompt-Medium.ttf
+  #         weight: 500
+  #       - asset: assets/fonts/Prompt-Bold.ttf
+  #         weight: 700

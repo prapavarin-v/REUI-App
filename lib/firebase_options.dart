@@ -23,15 +23,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         return windows;
       case TargetPlatform.linux:
@@ -47,30 +41,48 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB7grg_YNz75keWJ617LbOTngFGh1q_1Nc',
-    appId: '1:267943043201:web:11d04ba22964bfb9ffad80',
-    messagingSenderId: '267943043201',
-    projectId: 'renui-app',
-    authDomain: 'renui-app.firebaseapp.com',
-    storageBucket: 'renui-app.firebasestorage.app',
-    measurementId: 'G-59WCF8BRQL',
+    apiKey: 'AIzaSyCqYk26Hr4tjqKKrh4-qodrC1A0pNMfvCs',
+    appId: '1:101583822303:web:b1863acee2ca4a1030f86a',
+    messagingSenderId: '101583822303',
+    projectId: 'reuni-app-b2463',
+    authDomain: 'reuni-app-b2463.firebaseapp.com',
+    storageBucket: 'reuni-app-b2463.firebasestorage.app',
+    measurementId: 'G-1HYK008JGN',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA5CMiJFrhL4mkKvGzYu7KJLJmEVh-PoP4',
-    appId: '1:267943043201:android:f965b0f5407f2801ffad80',
-    messagingSenderId: '267943043201',
-    projectId: 'renui-app',
-    storageBucket: 'renui-app.firebasestorage.app',
+    apiKey: 'AIzaSyCGdVTwRlCGVsMbMwuhqdf-olNfgXEzwas',
+    appId: '1:101583822303:android:cd5a14f86e34d00a30f86a',
+    messagingSenderId: '101583822303',
+    projectId: 'reuni-app-b2463',
+    storageBucket: 'reuni-app-b2463.firebasestorage.app',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCQfeag4JKxECiBXStzmpoBw03weB8HUeA',
+    appId: '1:101583822303:ios:71f2400f3c87a08e30f86a',
+    messagingSenderId: '101583822303',
+    projectId: 'reuni-app-b2463',
+    storageBucket: 'reuni-app-b2463.firebasestorage.app',
+    iosBundleId: 'com.example.reuni',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCQfeag4JKxECiBXStzmpoBw03weB8HUeA',
+    appId: '1:101583822303:ios:71f2400f3c87a08e30f86a',
+    messagingSenderId: '101583822303',
+    projectId: 'reuni-app-b2463',
+    storageBucket: 'reuni-app-b2463.firebasestorage.app',
+    iosBundleId: 'com.example.reuni',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyB7grg_YNz75keWJ617LbOTngFGh1q_1Nc',
-    appId: '1:267943043201:web:ba453e47341eb78affad80',
-    messagingSenderId: '267943043201',
-    projectId: 'renui-app',
-    authDomain: 'renui-app.firebaseapp.com',
-    storageBucket: 'renui-app.firebasestorage.app',
-    measurementId: 'G-XTGFPTB4LJ',
+    apiKey: 'AIzaSyCqYk26Hr4tjqKKrh4-qodrC1A0pNMfvCs',
+    appId: '1:101583822303:web:559d8d25df2c982430f86a',
+    messagingSenderId: '101583822303',
+    projectId: 'reuni-app-b2463',
+    authDomain: 'reuni-app-b2463.firebaseapp.com',
+    storageBucket: 'reuni-app-b2463.firebasestorage.app',
+    measurementId: 'G-NJ03HBT167',
   );
 }
